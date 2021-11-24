@@ -1,0 +1,56 @@
+﻿@model EntityLayer.Concrete.Blog
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+
+
+<h3 style="text-align:center">Blog Düzenleme Sayfası</h3>
+<hr />
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <form asp-action="Edit" class="form-group">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="BlogId" />
+                <div class="form-group">
+                    <label class="control-label"><i class="mdi mdi-bookmark"></i>Blog Başlık</label>
+                    <input asp-for="BlogTitle" class="form-control" />
+                    <span asp-validation-for="BlogTitle" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label"><i class="mdi mdi-bookmark"></i>Blog İçerik</label>
+                    <textarea name="BlogCOntent" class="form-control" rows="30" maxlength="50">@Model.BlogContent</textarea>
+                    <span asp-validation-for="BlogContent" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label"><i class="mdi mdi-bookmark"></i>Blog Küçük Görsel</label>
+                    <input asp-for="BlogThumbnailImage" class="form-control" />
+                    <span asp-validation-for="BlogThumbnailImage" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label"><i class="mdi mdi-bookmark"></i>Blog Görsel</label>
+                    <input asp-for="BlogImage" class="form-control" />
+                    <span asp-validation-for="BlogImage" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label"><i class="mdi mdi-bookmark"></i>Oluşturma Tarihi</label>
+                    <input asp-for="BlogCreateDate"  class="form-control" />
+                    <span asp-validation-for="BlogCreateDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label"><i class="mdi mdi-bookmark"></i>Kategori</label>
+                    <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.cv"></select>
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Kaydet" class="btn btn-success w-100" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

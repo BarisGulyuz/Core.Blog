@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="10.3.3" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="10.3.3" />
+    <PackageReference Include="Grpc.Core" Version="2.41.1" />
+    <PackageReference Include="Microsoft.AspNet.WebPages" Version="3.2.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.9">
       <PrivateAssets>all</PrivateAssets>
@@ -25,7 +29,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Categories\Data\" />
+    <Folder Include="Areas\Categories\Models\" />
     <Folder Include="Views\Default\" />
+    <Folder Include="wwwroot\Upload\Writer\" />
   </ItemGroup>
 
 </Project>

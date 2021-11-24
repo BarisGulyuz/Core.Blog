@@ -1,0 +1,31 @@
+﻿@model IEnumerable<EntityLayer.Concrete.Message2>
+@{
+    ViewData["Title"] = "Inbox";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+
+<h3 style="text-align:center">Gelen Kutusu</h3>
+<hr />
+
+<table class="table table-light">
+    <tr>
+        <th>Görsel</th>
+        <th>Gönderen</th>
+        <th>Konu</th>
+        <th>Mesaj</th>
+        <th>Tarih</th>
+        <th>Mesajı Aç</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td><img src="~/Upload/Writer/@item.SenderUser.WriterImage" class="img-fluid" width="100" height="100" /></td>
+            <td>@item.SenderUser.WriterName</td>
+            <td>@item.Subject</td>
+            <td>@item.Details</td>
+            <td>@item.MessageDate.ToShortDateString()</td>
+            <td><a class="btn btn-primary btn-sm" href="">Mesajı Aç</a></td>
+        </tr>
+    }
+</table>
+

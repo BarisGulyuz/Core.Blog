@@ -1,0 +1,52 @@
+﻿@model IEnumerable<EntityLayer.Concrete.Blog>
+
+<div class="row">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Paylaşılan Son Bloglar</h4>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th> Görsel </th>
+                                <th> Başlık </th>
+                                <th> Kategori </th>
+                                <th> Kayıt Tarihi </th>
+                                <th> Durum </th>
+                                <th>#</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <img src="@item.BlogImage" width="100" height="100" class="mr-2" alt="image">
+                                    </td>
+                                    <td> @item.BlogTitle </td>
+                                    <td>
+                                        <label class="badge badge-gradient-warning">@item.Category.CategoryName</label>
+                                    </td>
+                                    <td> @item.BlogCreateDate.ToShortDateString() </td>
+
+                                    <td>
+                                        @if (item.BlogStatus == true)
+                                        {
+                                            <label class="badge badge-gradient-success">Aktif</label>
+                                        }
+                                        else
+                                        {
+                                            <label class="badge badge-gradient-danger">Pasif</label>
+                                        }
+                                    </td>
+                                    <td ><a class="btn btn-dark btn-sm" href="/Blog/BlogDetails/@item.BlogId">Bloğa Git</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

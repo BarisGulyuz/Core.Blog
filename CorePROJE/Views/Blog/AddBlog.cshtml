@@ -1,0 +1,46 @@
+﻿@model EntityLayer.Concrete.Blog
+@{
+    ViewData["Title"] = "AddBlog";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+<style>
+    label {
+        font-size: 15px;
+        font-weight: bold;
+    }
+    .form-control{
+        font-size: 15px;
+    }
+</style>
+<h3 style="text-align:center">
+    Yeni  Blog Girişi
+</h3>
+<hr />
+<br />
+<div class="container">
+    @using (Html.BeginForm("AddBlog", "Blog", FormMethod.Post))
+    {
+        <label><i class="mdi mdi-bookmark"></i>Blog Başlığı</label>
+        @Html.TextBoxFor(x => x.BlogTitle, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.BlogTitle)
+        <br />
+        <label><i class="mdi mdi-bookmark"></i>Blog Görseli</label>
+        @Html.TextBoxFor(x => x.BlogImage, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.BlogImage)
+        <br />
+        <label><i class="mdi mdi-bookmark"></i>Küçük Görsel</label>
+        @Html.TextBoxFor(x => x.BlogThumbnailImage, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.BlogThumbnailImage)
+        <br />
+        <label><i class="mdi mdi-bookmark"></i>Kategori</label>
+        <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.category"></select>
+        @Html.ValidationMessageFor(x => x.Category)
+        <br />
+        <label><i class="mdi mdi-bookmark"></i>Blog İçerik</label>
+        @Html.TextAreaFor(x => x.BlogContent, 20, 3, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.BlogContent)
+        <br />
+        <button class="btn btn-success">BLOG OLUŞTUR</button>
+    }
+</div>
+

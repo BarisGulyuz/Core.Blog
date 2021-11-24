@@ -1,0 +1,51 @@
+﻿@using EntityLayer.Concrete
+@model List<Blog>
+@{
+    ViewData["Title"] = "BlogListByWriter";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+@*<head>
+    <link rel="stylesheet" href="~/writer/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="~/writer/assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="~/writer/assets/css/style.css">
+    <link rel="shortcut icon" href="~/writer/assets/images/favicon.ico" />
+</head>*@
+
+<h3 style="text-align:center">Bloglarım</h3>
+<hr>
+<br />
+<table class="table table-light">
+    <tr>
+        <th>#</th>
+        <th>BLOG BAŞLIK</th>
+        <th>OLUŞTURMA TARİHİ</th>
+        <th>KATEGORİ</th>
+        <th>DURUM</th>
+        <th style="text-align:center">SİL</th>
+        <th style="text-align:center">DÜZENLE</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+<tr>
+    <th>@item.BlogId</th>
+    <td><a href="/Blog/BlogDetails/@item.BlogId">@item.BlogTitle</a></td>
+    <td>@item.BlogCreateDate.ToShortDateString()</td>
+    <td>@item.Category.CategoryName</td>
+    @if (item.BlogStatus == true)
+    {
+        <td><i class="badge badge-success">AKTİF</i></td>
+    }
+    else
+    {
+        <td><i class="badge badge-danger">PASİF</i></td>
+    }
+    <td style="text-align:center"><a class="btn btn-danger btn-sm" href="/Blog/BlogDelete/@item.BlogId">SİL</a></td>
+    <td style="text-align:center"><a class="btn btn-warning btn-sm" href="/Blog/Edit/@item.BlogId">DÜZENLE</a></td>
+</tr>
+    }
+</table>
+<br />
+<div style="margin-top:20px">
+    <a class="btn btn-gradient-info w-100" href="/Blog/AddBlog/">YENİ BLOG</a>
+</div>
+
