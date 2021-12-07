@@ -1,3 +1,6 @@
+using BussinessLayer.ValidationRules;
+using EntityLayer.Concrete;
+using FluentValidation;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -39,6 +42,7 @@ namespace CorePROJE
                 config.Filters.Add(new AuthorizeFilter(policy));
             });
 
+            services.AddScoped<IValidator<Blog>, BlogValidator>();
             //RETURN URL EKLEME
             services.AddMvc();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

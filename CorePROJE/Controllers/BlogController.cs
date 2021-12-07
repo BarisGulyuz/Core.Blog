@@ -3,6 +3,7 @@ using BussinessLayer.EntityFramework;
 using BussinessLayer.ValidationRules;
 using DataAccessLayer.Concrete;
 using EntityLayer.Concrete;
+using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,11 +15,17 @@ using System.Threading.Tasks;
 
 namespace CorePROJE.Controllers
 {
-    
+   
     public class BlogController : Controller
     {
+        
         BlogManager bm = new BlogManager(new EfBlogRepository());
-       
+        IValidator<Blog> _validator;
+
+        public BlogController(IValidator<Blog> validator)
+        {
+            _validator = validator;
+        }
 
         public IActionResult Index()
         {
@@ -72,8 +79,9 @@ namespace CorePROJE.Controllers
                                              ).ToList();
             ViewBag.category = cat;
 
-            BlogValidator wv = new BlogValidator();
-            ValidationResult result = wv.Validate(blog);
+            //BlogValidator wv = new BlogValidator();
+            //ValidationResult result = wv.Validate(blog);
+            var result = _validator.Validate(blog);
             if (result.IsValid)
             {
  

@@ -25,7 +25,7 @@
 
     <div id="wrapper">
 
-        
+
         @await Html.PartialAsync("~/Areas/Admin/Views/Admin/AdminNavbarPartial.cshtml")
         <div id="page-wrapper" class="gray-bg">
             <div class="row border-bottom">
@@ -108,16 +108,16 @@
                 <div class="col-lg-10">
                     <h2>Admin İşlemleri</h2>
                     <!--<ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                        <a href="index.html">Admin</a>
-                    </li>
-                    <li class="breadcrumb-item">
-                        <a>Tables</a>
-                    </li>
-                    <li class="breadcrumb-item active">
-                        <strong>Static Tables</strong>
-                    </li>
-                </ol>-->
+                        <li class="breadcrumb-item">
+                            <a href="index.html">Admin</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a>Tables</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            <strong>Static Tables</strong>
+                        </li>
+                    </ol>-->
                 </div>
                 <div class="col-lg-2">
 
@@ -127,9 +127,6 @@
                 @RenderBody()
             </div>
             <div class="footer">
-                <div class="float-right">
-                    10GB of <strong>250GB</strong> Free.
-                </div>
                 <div>
                     <strong>Copyright</strong> &copy; @DateTime.Now.Year
                 </div>
@@ -161,7 +158,7 @@
     <script src="~/coreAdmin/js/demo/peity-demo.js"></script>
 
     <script>
-    $(document).ready(function () {
+        $(document).ready(function () {
             $('.i-checks').iCheck({
                 checkboxClass: 'icheckbox_square-green',
                 radioClass: 'iradio_square-green',

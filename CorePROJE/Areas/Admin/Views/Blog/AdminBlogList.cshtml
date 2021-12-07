@@ -1,0 +1,56 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+@model IPagedList<EntityLayer.Concrete.Blog>
+@{
+    ViewData["Title"] = "AdminBlogList";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container">
+    <h3 style="text-align:center">Blog İşlemleri</h3>
+</div>
+<form class="ibox-content mt-1 mb-1" id="search-form">
+    <label class="label-info mb-2" l><b style="font-size:larger">Blog Başlık</b></label>
+    <input class="form-control mb-2" name="blogTitle" placeholder="Blog Başlığını Giriniz" />
+    <input class="btn btn-info" type="submit" asp-area="Admin" asp-controller="Blog" asp-action="AdminBlogList" value="ARA" />
+</form>
+<div class="ibox-content">
+    <input class="btn btn-outline-info" value="Arama Kutusu" id="search-button" />
+    <a class="btn btn-outline-success" href="/Admin/Blog/ExportEXCEL">EXCEL</a>
+</div>
+<div class="ibox-content">
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <tr>
+                <th>#</th>
+                <th>Görsel</th>
+                <th>Blog Başlık</th>
+                <th>Kategori</th>
+                <th>Tarih</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th>@item.BlogId</th>
+                    <td><img src="@item.BlogImage" width="50" height="50" /></td>
+                    <td>@item.BlogTitle</td>
+                    <td>@item.Category.CategoryName</td>
+                    <td>@item.BlogCreateDate.ToShortDateString()</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+<div class="page-item mt-3">
+    @Html.PagedListPager((IPagedList)Model, page => Url.Action("AdminBlogList", new { page }))
+</div>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script>
+
+    $(document).ready(function () {
+        $('#search-form').hide()
+    })
+    $('#search-button').click(function () {
+        $('#search-form').toggle(1000)
+    })
+</script>

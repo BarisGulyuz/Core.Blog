@@ -1,24 +1,26 @@
-﻿@model IEnumerable<EntityLayer.Concrete.Category>
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@model IPagedList<EntityLayer.Concrete.Category>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 <style>
-    #addCat{
-        width:100%;
+    #addCat {
         border-radius: 30px;
         font-size: 14px;
     }
-    #addCat:hover{
-        font-size: 16px;
-        height: 40px;
-    }
+
+        #addCat:hover {
+            font-size: 16px;
+            height: 40px;
+        }
 </style>
 <div class="container">
     <h3 style="text-align:center">Kategori İşlemleri</h3>
 </div>
 <div class="ibox-content">
-    <a class="btn btn-info" id="addCat" href="#">Yeni Kategori Ekle</a>
+    <a class="btn btn-outline-info" id="addCat" href="/Categories/Category/AddCategory/">Yeni Kategori Ekle</a>
 </div>
 <div class="ibox-content">
     <div class="table-responsive">
@@ -26,27 +28,30 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th >Kategori Adı</th>
+                    <th>Kategori Adı</th>
                     <th>Kategori Açıklama</th>
-                    <th >İşlemler</th>
+                    <th>İşlemler</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
-                <tr>
-                    <td>@item.CategoryId</td>
-                    <td>@item.CategoryName</td>
-                    <td>@item.CategoryDescription</td>
-                    <td>
-                        <a class="btn btn-outline-warning" href="/Categories/Category/EditCategory/@item.CategoryId">Düzenle</a>
-                        <a class="btn btn-outline-danger" href="">Sil</a>
-                        <a class="btn btn-outline-dark" href="">Pasif Yap</a>
-                    </td>
+                    <tr>
+                        <td>@item.CategoryId</td>
+                        <td>@item.CategoryName</td>
+                        <td>@item.CategoryDescription</td>
+                        <td>
+                            <a class="btn btn-outline-warning" href="/Categories/Category/EditCategory/@item.CategoryId">Düzenle</a>
+                            <a class="btn btn-outline-danger" id="btn-delete" onclick="return confirm('Silmek İstediğinize Emin Misiniz?');" href="/Categories/Category/DeleteCategory/@item.CategoryId">Sil</a>
+                            <a class="btn btn-outline-dark" href="">Pasif Yap</a>
+                        </td>
 
-                </tr>
+                    </tr>
                 }
             </tbody>
         </table>
     </div>
+</div>
+<div class="page-item mt-3">
+    @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }))
 </div>
