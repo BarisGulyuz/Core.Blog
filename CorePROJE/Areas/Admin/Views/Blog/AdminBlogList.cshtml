@@ -7,7 +7,7 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 <div class="container">
-    <h3 style="text-align:center">Blog İşlemleri</h3>
+    <h4 style="text-align:center">Blog İşlemleri</h4>
 </div>
 <form class="ibox-content mt-1 mb-1" id="search-form">
     <label class="label-info mb-2" l><b style="font-size:larger">Blog Başlık</b></label>
@@ -16,7 +16,7 @@
 </form>
 <div class="ibox-content">
     <input class="btn btn-outline-info" value="Arama Kutusu" id="search-button" />
-    <a class="btn btn-outline-success" href="/Admin/Blog/ExportEXCEL">EXCEL</a>
+    <a onclick="return confirm('Verileri Excele çekmek istiyor musunuz?')" onsubmit="return alert('Excel verileri indirildi')" class="btn btn-outline-success" href="/Admin/Blog/ExportEXCEL">EXCEL</a>
 </div>
 <div class="ibox-content">
     <div class="table-responsive">
@@ -26,7 +26,8 @@
                 <th>Görsel</th>
                 <th>Blog Başlık</th>
                 <th>Kategori</th>
-                <th>Tarih</th>
+                <th>Kayıt Tarih</th>
+                <th></th>
             </tr>
             @foreach (var item in Model)
             {
@@ -36,6 +37,11 @@
                     <td>@item.BlogTitle</td>
                     <td>@item.Category.CategoryName</td>
                     <td>@item.BlogCreateDate.ToShortDateString()</td>
+                    <td>
+                        <a class="btn btn-info btn-sm text-white">Görüntüle</a>
+                        <a class="btn btn-warning text-white">Yazar Bilgisi</a>
+                        <a class="btn btn-danger text-white">Pasif Yap</a>
+                    </td>
                 </tr>
             }
         </table>

@@ -29,6 +29,12 @@ namespace BussinessLayer.Concrete
         {
             return _categoryDal.GetListAll();
         }
+
+        public List<Category> GetListWithBlog()
+        {
+            return _categoryDal.GetListWihtBlog();
+        }
+
         public void TAdd(Category t)
         {
             _categoryDal.Insert(t);

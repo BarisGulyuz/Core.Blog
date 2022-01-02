@@ -9,10 +9,6 @@ namespace CorePROJE.Areas.Admin.Controllers
     public class AdminController : Controller
     {
         [Area("Admin")]
-        public IActionResult Index()
-        {
-            return View();
-        }
 
         public PartialViewResult AdminNavbarPartial()
         {

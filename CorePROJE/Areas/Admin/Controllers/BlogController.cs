@@ -58,19 +58,5 @@ namespace CorePROJE.Areas.Admin.Controllers
                 }
             }
         }
-
-       //public List<BlogModel> BlogTitles()
-       // {
-       //     List<BlogModel> blogModels = new List<BlogModel>();
-       //     using (var context = new Context())
-       //     {
-       //         blogModels = context.Blogs.Select(x => new BlogModel
-       //         {
-       //             Id = x.BlogId,
-       //             Title = x.BlogTitle
-       //         }).ToList();
-       //     }
-       //     return blogModels;
-       // }
     }
 }

@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container">
+    <h4 style="text-align:center">Yazar İşlemleri</h4>
+</div>
+<div class="ibox-content">
+    <div class="row">
+        <button id="btn-writer-list" class="btn btn-success ml-2">Yazar Listesi</button>
+        <input  type="text" id="writerId" placeholder="Yazar Id Değerini Giriniz..." class="form-control col-5 mr-1 ml-3" />
+        <button id="btn-get-writer" class="btn btn-warning">Yazar Bul</button>
+    </div>
+
+</div>
+<div class="ibox-content" id="writerListDiv">
+
+</div>
+<div class="ibox-content" id="writerInfoDiv">
+    <h3 class="text-center">Yazar Bilgileri</h3>
+    <div class="row">
+        <label class="control-label">Yazar Adı</label>
+        <input class="form-control col-12" id="writerName" />
+    </div>
+    <div class="row">
+        <button class="btn btn-close mt-3 w-100" style="color:red">X</button>
+    </div>
+    
+</div>
+
+
+
+@section script{
+    @*<script src="~/lib/jquery/dist/jquery.js"></script>*@
+
+    <script>
+        $(document).ready(function () {
+            $('#writerListDiv').hide()
+            $('#writerInfoDiv').hide()
+        })
+        $('#btn-writer-list').click(function () {
+            $('#writerListDiv').toggle(500)
+            $.ajax({
+                contentType: "application/json",
+                dataType: "json",
+                type: "GET",
+                url: "/Admin/Writer/WriterList",
+                success: function (writerData) {
+                    let data = jQuery.parseJSON(writerData)
+                    console.log(data)
+                    let table = `<table id="writerTable" class="table table-bordered table-hover">
+                                         <tr>
+                                            <th>#</th>
+                                            <th>Yazar Adı</th>
+                                             <th></th>
+                                        </tr>`
+
+                    $.each(data, (key, value) => {
+                        table += `<tr> <td> ${value.WriterId} </td>
+                                                       <td> ${value.WriterName} </td>
+                                                       <td>  <a class="btn btn-info btn-sm text-white">Yazarın Blogları</a>
+                                                             <a class="btn btn-warning btn-sm text-white">Yazarın Profili</a> </td> </tr>`
+                    })
+                    table += `</table>`
+                    $('#writerListDiv').html(table)
+                },
+                error: function () {
+                    alert('Yükleme işleminde bir sorun meydana geldi lütfen tekrar deneyiniz')
+                }
+            })
+        })
+
+        $('#btn-get-writer').click(function () {
+            
+            let id = $('#writerId').val()
+            $.ajax({
+                contentType: "application/json; chartef=utf-8",
+                dataType: "json",
+                type: "GET",
+                url: '/Admin/Writer/GetWriter/',
+                data: { writerId: id },
+                success: function (data) {
+                    $('#writerInfoDiv').toggle(500)
+                    let writerData = jQuery.parseJSON(data)
+                    $('#writerName').val(writerData[0].WriterName)
+                },
+                error: function () {
+                    alert('Geçersiz bir Id giriniz')
+                }
+            })
+        })
+    </script>
+}
